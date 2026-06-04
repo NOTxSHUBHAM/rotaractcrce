@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RotaConnect 2.0 - Rotaract CRCE Smart Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #F0D080;
+            --navy: #0D1B2A;
+            --navy2: #1A2F44;
+            --teal: #1D8A6E;
+            --teal-light: #E1F5EE;
+            --accent: #E8534A;
+            --color-background-primary: #FFFFFF;
+            --color-background-secondary: #F8F9FA;
+            --color-border-tertiary: #E5E7EB;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --border-radius-md: 8px;
+            --border-radius-lg: 16px;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .app {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--color-background-primary);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            border: 0.5px solid var(--color-border-tertiary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* TOP HERO BANNER */
+        .hero {
+            background: var(--navy);
+            padding: 2rem 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 1px solid rgba(201,168,76,0.15);
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 1px solid rgba(201,168,76,0.08);
+        }
+        
+        .hero-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), #a07828);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 13px;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        
+        .site-name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+        }
+        
+        .site-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.45);
+            margin-top: 1px;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .nav-pill {
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 0.5px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.6);
+            background: transparent;
+            transition: all 0.2s;
+        }
+        
+        .nav-pill:hover, .nav-pill.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #fff;
+        }
+        
+        .hero-body {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: end;
+        }
+        
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            color: #fff;
+            line-height: 1.1;
+        }
+        
+        .hero-title span {
+            color: var(--gold);
+        }
+        
+        .hero-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 8px;
+            max-width: 360px;
+            line-height: 1.6;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .hstat {
+            text-align: center;
+        }
+        
+        .hstat-n {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--gold-light);
+        }
+        
+        .hstat-l {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* TABS */
+        .tabs {
+            display: flex;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+            background: var(--color-background-secondary);
+            padding: 0 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .tab {
+            padding: 12px 18px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: var(--color-text-secondary);
+            transition: all 0.2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .tab.active {
+            color: var(--navy);
+            border-bottom-color: var(--gold);
+        }
+        
+        .tab:hover {
+            color: var(--color-text-primary);
+        }
+        
+        /* MAIN CONTENT */
+        .content {
+            padding: 1.5rem;
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+        }
+        
+        /* MEMBER DASHBOARD */
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .metric {
+            background: var(--color-background-secondary);
+            border-radius: var(--border-radius-md);
+            padding: 1rem;
+            transition: transform 0.2s;
+        }
+        
+        .metric:hover {
+            transform: translateY(-2px);
+        }
+        
+        .metric-n {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .metric-l {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 2px;
+        }
+        
+        .metric-badge {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .badge-g {
+            background: var(--teal-light);
+            color: var(--teal);
+        }
+        
+        .badge-a {
+            background: #FAEEDA;
+            color: #854F0B;
+        }
+        
+        .two-col {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 12px;
+        }
+        
+        .card {
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: var(--border-radius-lg);
+            padding: 1.25rem;
+            transition: box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .event-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+        }
+        
+        .event-row:last-child {
+            border-bottom: none;
+        }
+        
+        .event-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .dot-gold {
+            background: var(--gold);
+        }
+        
+        .dot-teal {
+            background: var(--teal);
+        }
+        
+        .dot-red {
+            background: var(--accent);
+        }
+        
+        .event-info {
+            flex: 1;
+        }
+        
+        .event-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+        
+        .event-date {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+        }
+        
+        .event-tag {
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .tag-open {
+            background: #E6F1FB;
+            color: #185FA5;
+            cursor: pointer;
+        }
+        
+        .tag-full {
+            background: #FCEBEB;
+            color: #A32D2D;
+        }
+        
+        .tag-soon {
+            background: #FAEEDA;
+            color: #854F0B;
+        }
+        
+        /* profile card */
+        .profile-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--navy);
+            border-radius: var(--border-radius-lg);
+            padding: 1rem 1.25rem;
+            margin-bottom: 12px;
+        }
+        
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+        }
+        
+        .profile-name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+        }
+        
+        .profile-role {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 2px;
+        }
+        
+        .progress-row {
+            margin-top: 10px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        /* EVENTS */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 12px;
+        }
+        
+        .event-card {
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .event-header {
+            padding: 1rem;
+            background: var(--navy);
+            position: relative;
+        }
+        
+        .event-header-cat {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+        
+        .event-header-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+        }
+        
+        .event-header-date {
+            font-size: 11px;
+            color: rgba(255,255,255,0.45);
+            margin-top: 4px;
+        }
+        
+        .qr-chip {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(201,168,76,0.15);
+            border: 0.5px solid rgba(201,168,76,0.3);
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 10px;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .event-body {
+            padding: 1rem;
+        }
+        
+        .event-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .emeta {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .reg-btn {
+            width: 100%;
+            padding: 8px;
+            border-radius: var(--border-radius-md);
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            background: var(--navy);
+            color: #fff;
+            transition: all 0.2s;
+        }
+        
+        .reg-btn:hover:not(:disabled) {
+            opacity: 0.85;
+            transform: scale(0.98);
+        }
+        
+        .reg-btn.full {
+            background: var(--color-background-secondary);
+            color: var(--color-text-secondary);
+            cursor: default;
+        }
+        
+        /* VOLUNTEERS */
+        .vol-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .leaderboard {
+            margin-top: 0;
+        }
+        
+        .lb-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 0;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+        }
+        
+        .lb-row:last-child {
+            border-bottom: none;
+        }
+        
+        .lb-rank {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        
+        .rank-1 {
+            background: var(--gold);
+            color: #fff;
+        }
+        
+        .rank-2 {
+            background: #B4B2A9;
+            color: #fff;
+        }
+        
+        .rank-3 {
+            background: #C9844C;
+            color: #fff;
+        }
+        
+        .rank-n {
+            background: var(--color-background-secondary);
+            color: var(--color-text-secondary);
+        }
+        
+        .lb-name {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+        
+        .lb-pts {
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        .lb-bar-wrap {
+            width: 80px;
+            height: 4px;
+            background: var(--color-background-secondary);
+            border-radius: 2px;
+            margin-left: 4px;
+        }
+        
+        .lb-bar {
+            height: 100%;
+            border-radius: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        .task-list {
+            margin-top: 0;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+        }
+        
+        .task-item:last-child {
+            border-bottom: none;
+        }
+        
+        .task-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .st-done {
+            background: var(--teal);
+        }
+        
+        .st-prog {
+            background: var(--gold);
+        }
+        
+        .st-todo {
+            background: var(--color-border-secondary);
+        }
+        
+        .task-name {
+            flex: 1;
+            font-size: 12px;
+            color: var(--color-text-primary);
+        }
+        
+        .task-tag {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--color-border-tertiary);
+            border-radius: var(--border-radius-md);
+            font-size: 0.9rem;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--navy);
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--border-radius-md);
+            display: none;
+            z-index: 1000;
+            animation: slideIn 0.3s;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-body {
+                grid-template-columns: 1fr;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .vol-header {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <div class="hero">
+        <div class="hero-top">
+            <div class="logo-row">
+                <div class="logo-badge">RC</div>
+                <div>
+                    <div class="site-name">RotaConnect 2.0</div>
+                    <div class="site-sub">Rotaract CRCE · Smart Club Portal</div>
+                </div>
+            </div>
+            <div class="nav-pills">
+                <div class="nav-pill" onclick="toggleLogin()" id="loginBtn">Login</div>
+                <div class="nav-pill" onclick="logout()" id="logoutBtn" style="display:none;">Logout</div>
+            </div>
+        </div>
+        <div class="hero-body">
+            <div>
+                <div class="hero-title">One place for <span>everything</span><br>your club does.</div>
+                <div class="hero-desc">Events, volunteers, certificates, announcements — all in a single smart portal built for Rotaract CRCE members.</div>
+            </div>
+            <div class="hero-stats">
+                <div class="hstat"><div class="hstat-n" id="statEvents">15</div><div class="hstat-l">Events</div></div>
+                <div class="hstat"><div class="hstat-n" id="statMembers">340+</div><div class="hstat-l">Members</div></div>
+                <div class="hstat"><div class="hstat-n" id="statHours">1240</div><div class="hstat-l">Volunteer Hrs</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('dash',this)">📊 Dashboard</div>
+        <div class="tab" onclick="switchTab('events',this)">📅 Events</div>
+        <div class="tab" onclick="switchTab('volunteers',this)">🤝 Volunteers</div>
+        <div class="tab" onclick="switchTab('certs',this)">📜 Certificates</div>
+        <div class="tab" onclick="switchTab('analytics',this)">📈 Analytics</div>
+        <div class="tab" onclick="switchTab('announce',this)">🔔 Announcements</div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="content active" id="tab-dash">
+        <div class="profile-card">
+            <div class="avatar" id="userAvatar">G</div>
+            <div style="flex:1;">
+                <div class="profile-name" id="userName">Guest User</div>
+                <div class="profile-role" id="userRole">Please login to access features</div>
+                <div class="progress-row">
+                    <div class="progress-label"><span>Participation score</span><span id="userScore">0 / 100</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="userProgress" style="width:0%"></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="dash-grid">
+            <div class="metric">
+                <div class="metric-n" id="dashEventsAttended">0</div>
+                <div class="metric-l">Events attended</div>
+                <div class="metric-badge badge-g">+<span id="monthlyEvents">0</span> this month</div>
+            </div>
+            <div class="metric">
+                <div class="metric-n" id="dashVolunteerRoles">0</div>
+                <div class="metric-l">Volunteer roles</div>
+                <div class="metric-badge badge-g" id="volunteerStatus">Not started</div>
+            </div>
+            <div class="metric">
+                <div class="metric-n" id="dashCertificates">0</div>
+                <div class="metric-l">Certificates earned</div>
+                <div class="metric-badge badge-a" id="pendingCert">0 pending</div>
+            </div>
+        </div>
+        <div class="two-col">
+            <div class="card">
+                <div class="card-title">📅 Upcoming events</div>
+                <div id="upcomingEventsList"></div>
+            </div>
+            <div class="card">
+                <div class="card-title">🏆 Your achievements</div>
+                <div id="achievementsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="content" id="tab-events">
+        <div class="event-grid" id="eventsGrid"></div>
+    </div>
+
+    <!-- VOLUNTEERS -->
+    <div class="content" id="tab-volunteers">
+        <div class="vol-header">
+            <div class="card">
+                <div class="card-title">🏆 Volunteer leaderboard</div>
+                <div class="leaderboard" id="leaderboardList"></div>
+            </div>
+            <div class="card">
+                <div class="card-title">📋 My assigned tasks</div>
+                <div class="task-list" id="taskList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CERTIFICATES -->
+    <div class="content" id="tab-certs">
+        <div id="certificatesList"></div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="content" id="tab-analytics">
+        <div class="analytics-grid" id="analyticsGrid"></div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <div class="content" id="tab-announce">
+        <div id="announcementsList"></div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <h2 style="margin-bottom: 1rem;">Welcome to RotaConnect</h2>
+        <div class="form-group">
+            <input type="text" id="loginName" placeholder="Full Name">
+        </div>
+        <div class="form-group">
+            <input type="email" id="loginEmail" placeholder="College Email">
+        </div>
+        <div class="form-group">
+            <select id="loginRole" style="width:100%; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px;">
+                <option value="member">Member</option>
+                <option value="volunteer">Volunteer</option>
+                <option value="board">Board Member</option>
+            </select>
+        </div>
+        <button class="reg-btn" onclick="login()" style="background:var(--gold);">Login / Register →</button>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #666; text-align: center;">Demo: Use any email to test features</p>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+    // Sample Data
+    const eventsData = [
+        { id: 1, name: "Hack for Good 2025", category: "Tech · Flagship", date: "June 14, 2025", time: "9:00 AM", venue: "Main Hall", spots: 60, registered: 47, status: "open", color: "#0D1B2A" },
+        { id: 2, name: "Blood Donation Drive", category: "Service · Health", date: "June 22, 2025", time: "10:00 AM", venue: "College Ground", spots: 60, registered: 60, status: "full", color: "#1A2F44" },
+        { id: 3, name: "Leadership Workshop", category: "Leadership", date: "June 18, 2025", time: "2:00 PM", venue: "Room 302", spots: 30, registered: 28, status: "soon", color: "#0F3D30" },
+        { id: 4, name: "Installation Ceremony", category: "Annual", date: "July 1, 2025", time: "6:00 PM", venue: "Auditorium", spots: 200, registered: 12, status: "open", color: "#2A1A0D" }
+    ];
+
+    let currentUser = null;
+    let userRegistrations = [];
+    let userTasks = [];
+    let userCertificates = [];
+
+    // Load from localStorage
+    function loadData() {
+        const savedUser = localStorage.getItem('currentUser');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+            updateUIForUser();
+        }
+        
+        const savedRegs = localStorage.getItem(`regs_${currentUser?.email}`);
+        if (savedRegs) userRegistrations = JSON.parse(savedRegs);
+        
+        const savedTasks = localStorage.getItem(`tasks_${currentUser?.email}`);
+        if (savedTasks) userTasks = JSON.parse(savedTasks);
+        
+        const savedCerts = localStorage.getItem(`certs_${currentUser?.email}`);
+        if (savedCerts) userCertificates = JSON.parse(savedCerts);
+        
+        renderAll();
+    }
+
+    function login() {
+        const name = document.getElementById('loginName').value;
+        const email = document.getElementById('loginEmail').value;
+        const role = document.getElementById('loginRole').value;
+        
+        if (!name || !email) {
+            showToast('Please fill all fields', 'error');
+            return;
+        }
+        
+        currentUser = {
+            name: name,
+            email: email,
+            role: role,
+            joinDate: new Date().toISOString(),
+            points: 0,
+            eventsAttended: 0,
+            volunteerHours: 0
+        };
+        
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'block';
+        
+        updateUIForUser();
+        renderAll();
+        showToast(`Welcome ${name}! You're now logged in.`, 'success');
+    }
+    
+    function logout() {
+        currentUser = null;
+        localStorage.removeItem('currentUser');
+        document.getElementById('loginBtn').style.display = 'block';
+        document.getElementById('logoutBtn').style.display = 'none';
+        updateUIForUser();
+        renderAll();
+        showToast('Logged out successfully', 'success');
+    }
+    
+    function toggleLogin() {
+        document.getElementById('loginModal').style.display = 'flex';
+    }
+    
+    function updateUIForUser() {
+        if (currentUser) {
+            document.getElementById('userAvatar').innerText = currentUser.name.charAt(0);
+            document.getElementById('userName').innerText = currentUser.name;
+            document.getElementById('userRole').innerText = currentUser.role === 'board' ? 'Board Member' : (currentUser.role === 'volunteer' ? 'Active Volunteer' : 'Member');
+            
+            const score = Math.min(userRegistrations.length * 10 + userTasks.filter(t => t.status === 'done').length * 5, 100);
+            document.getElementById('userScore').innerText = `${score} / 100`;
+            document.getElementById('userProgress').style.width = `${score}%`;
+            
+            document.getElementById('dashEventsAttended').innerText = userRegistrations.length;
+            document.getElementById('dashVolunteerRoles').innerText = userTasks.filter(t => t.status === 'done').length;
+            document.getElementById('dashCertificates').innerText = userCertificates.length;
+        } else {
+            document.getElementById('userAvatar').innerText = 'G';
+            document.getElementById('userName').innerText = 'Guest User';
+            document.getElementById('userRole').innerText = 'Please login to access features';
+            document.getElementById('userScore').innerText = '0 / 100';
+            document.getElementById('userProgress').style.width = '0%';
+            document.getElementById('dashEventsAttended').innerText = '0';
+            document.getElementById('dashVolunteerRoles').innerText = '0';
+            document.getElementById('dashCertificates').innerText = '0';
+        }
+    }
+    
+    function registerForEvent(eventId) {
+        if (!currentUser) {
+            showToast('Please login first!', 'error');
+            toggleLogin();
+            return;
+        }
+        
+        const event = eventsData.find(e => e.id === eventId);
+        if (!event) return;
+        
+        if (userRegistrations.some(r => r.eventId === eventId)) {
+            showToast('Already registered for this event!', 'error');
+            return;
+        }
+        
+        if (event.registered >= event.spots) {
+            showToast('Event is full!', 'error');
+            return;
+        }
+        
+        userRegistrations.push({
+            eventId: eventId,
+            registeredAt: new Date().toISOString(),
+            attended: false
+        });
+        
+        event.registered++;
+        localStorage.setItem(`regs_${currentUser.email}`, JSON.stringify(userRegistrations));
+        
+        showToast(`Successfully registered for ${event.name}!`, 'success');
+        renderAll();
+        updateUIForUser();
+    }
+    
+    function markAttendance(eventId) {
+        const registration = userRegistrations.find(r => r.eventId === eventId);
+        if (registration && !registration.attended) {
+            registration.attended = true;
+            localStorage.setItem(`regs_${currentUser.email}`, JSON.stringify(userRegistrations));
+            
+            // Add volunteer points
+            currentUser.points = (currentUser.points || 0) + 10;
+            currentUser.eventsAttended = (currentUser.eventsAttended || 0) + 1;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            showToast('Attendance marked! +10 points', 'success');
+            renderAll();
+            updateUIForUser();
+        }
+    }
+    
+    function renderAll() {
+        renderUpcomingEvents();
+        renderEventsGrid();
+        renderLeaderboard();
+        renderTasks();
+        renderCertificates();
+        renderAchievements();
+        renderAnnouncements();
+        renderAnalytics();
+    }
+    
+    function renderUpcomingEvents() {
+        const container = document.getElementById('upcomingEventsList');
+        if (!container) return;
+        
+        const upcoming = eventsData.slice(0, 4);
+        container.innerHTML = upcoming.map(event => `
+            <div class="event-row">
+                <div class="event-dot dot-gold"></div>
+                <div class="event-info">
+                    <div class="event-name">${event.name}</div>
+                    <div class="event-date">${event.date} · ${event.venue}</div>
+                </div>
+                <span class="event-tag tag-${event.status}">${event.status === 'open' ? 'Open' : (event.status === 'full' ? 'Full' : 'Few spots')}</span>
+            </div>
+        `).join('');
+    }
+    
+    function renderEventsGrid() {
+        const container = document.getElementById('eventsGrid');
+        if (!container) return;
+        
+        container.innerHTML = eventsData.map(event => `
+            <div class="event-card">
+                <div class="event-header" style="background:${event.color}">
+                    <div class="event-header-cat">${event.category}</div>
+                    <div class="event-header-title">${event.name}</div>
+                    <div class="event-header-date">${event.date} · ${event.time}</div>
+                    <div class="qr-chip" onclick="markAttendance(${event.id})">📷 QR check-in</div>
+                </div>
+                <div class="event-body">
+                    <div class="event-meta">
+                        <div class="emeta">📍 ${event.venue}</div>
+                        <div class="emeta">👥 ${event.registered}/${event.spots}</div>
+                    </div>
+                    <button class="reg-btn ${event.registered >= event.spots ? 'full' : ''}" 
+                            onclick="registerForEvent(${event.id})"
+                            ${event.registered >= event.spots ? 'disabled' : ''}>
+                        ${event.registered >= event.spots ? 'Registrations full' : 'Register now →'}
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function renderLeaderboard() {
+        const container = document.getElementById('leaderboardList');
+        if (!container) return;
+        
+        const volunteers = [
+            { name: "Sneha Patil", points: 320, bar: 100 },
+            { name: "Rohan Mehta", points: 256, bar: 80 },
+            { name: "Priya Sharma", points: 214, bar: 67 },
+            { name: currentUser?.name || "You", points: currentUser?.points || 0, bar: currentUser?.points ? (currentUser.points / 3.2) : 0 },
+            { name: "Kavya Nair", points: 135, bar: 42 }
+        ].sort((a,b) => b.points - a.points);
+        
+        container.innerHTML = volunteers.map((vol, idx) => `
+            <div class="lb-row">
+                <div class="lb-rank ${idx === 0 ? 'rank-1' : (idx === 1 ? 'rank-2' : (idx === 2 ? 'rank-3' : 'rank-n'))}">${idx+1}</div>
+                <div class="lb-name">${vol.name} ${vol.name === currentUser?.name ? '(You)' : ''}</div>
+                <div class="lb-bar-wrap"><div class="lb-bar" style="width:${Math.min(vol.bar, 100)}%"></div></div>
+                <div class="lb-pts">${vol.points} pts</div>
+            </div>
+        `).join('');
+    }
+    
+    function renderTasks() {
+        const container = document.getElementById('taskList');
+        if (!container) return;
+        
+        const tasks = [
+            { name: "Set up registration desk", status: "done", tag: "Done" },
+            { name: "Coordinate QR scanning", status: "progress", tag: "In progress" },
+            { name: "Distribute refreshments", status: "todo", tag: "To do" }
+        ];
+        
+        container.innerHTML = tasks.map(task => `
+            <div class="task-item">
+                <div class="task-status st-${task.status === 'done' ? 'done' : (task.status === 'progress' ? 'prog' : 'todo')}"></div>
+                <div class="task-name">${task.name}</div>
+                <span class="task-tag" style="background:${task.status === 'done' ? 'var(--teal-light)' : (task.status === 'progress' ? '#FAEEDA' : 'var(--color-background-secondary)')}; 
+                                             color:${task.status === 'done' ? 'var(--teal)' : (task.status === 'progress' ? '#854F0B' : 'var(--color-text-secondary)')}">
+                    ${task.tag}
+                </span>
+            </div>
+        `).join('');
+    }
+    
+    function renderCertificates() {
+        const container = document.getElementById('certificatesList');
+        if (!container) return;
+        
+        const certs = userCertificates.length > 0 ? userCertificates : [
+            { name: "Hack for Good", date: "Jun 14, 2025", available: true },
+            { name: "Leadership Summit", date: "Apr 3, 2025", available: true },
+            { name: "Blood Donation Drive", date: "Jun 22, 2025", available: false }
+        ];
+        
+        container.innerHTML = `
+            <div class="cert-preview" style="background:var(--navy);border-radius:16px;padding:2rem;text-align:center;margin-bottom:14px;">
+                <div class="cert-watermark">ROTARACT</div>
+                <div class="cert-logo-row">
+                    <div class="cert-logo">RC</div>
+                    <div class="cert-org">Rotaract Club of Fr. C. Rodrigues Institute of Technology</div>
+                </div>
+                <div class="cert-headline">Certificate of participation</div>
+                <div class="cert-name">${currentUser?.name || 'Your Name'}</div>
+                <div class="cert-body">has successfully participated in</div>
+                <div class="cert-event">${userRegistrations.length > 0 ? eventsData.find(e => e.id === userRegistrations[0]?.eventId)?.name || 'Club Events' : 'Club Events'}</div>
+                <div class="cert-line"></div>
+                <div class="cert-date">${new Date().toLocaleDateString()} · Rotaract CRCE · Auto-generated</div>
+            </div>
+            <div class="cert-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;">
+                ${certs.map(cert => `
+                    <div class="cert-item" style="border:0.5px solid #e5e7eb;border-radius:8px;padding:12px;display:flex;align-items:center;gap:8px;${!cert.available ? 'opacity:0.5' : ''}">
+                        <div class="cert-icon-wrap" style="width:32px;height:32px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--gold);">
+                            📜
+                        </div>
+                        <div>
+                            <div class="cert-item-name">${cert.name}</div>
+                            <div class="cert-item-event">${cert.date}</div>
+                            ${cert.available ? '<div class="dl-btn" style="margin-top:4px;font-size:10px;color:var(--teal);cursor:pointer;">⬇ Download PDF</div>' : '<div class="dl-btn" style="margin-top:4px;font-size:10px;color:#6B7280;">Available after event</div>'}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    function renderAchievements() {
+        const container = document.getElementById('achievementsList');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--color-background-secondary);border-radius:8px;">
+                    <span style="font-size:18px;">🏆</span>
+                    <div><div style="font-size:12px;font-weight:500;">${userRegistrations.length > 3 ? 'Active Member' : 'New Member'}</div><div style="font-size:10px;color:#6B7280;">${userRegistrations.length} events attended</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--color-background-secondary);border-radius:8px;">
+                    <span style="font-size:18px;">⭐</span>
+                    <div><div style="font-size:12px;font-weight:500;">${currentUser?.points > 50 ? 'Rising Star' : 'Getting Started'}</div><div style="font-size:10px;color:#6B7280;">${currentUser?.points || 0} points earned</div></div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderAnnouncements() {
+        const container = document.getElementById('announcementsList');
+        if (!container) return;
+        
+        const announcements = [
+            { title: "Hack for Good 2025 — Registration deadline extended to June 12", time: "2 hours ago", icon: "🔔", type: "gold" },
+            { title: "Certificates for Leadership Summit 2025 are now available", time: "1 day ago", icon: "📜", type: "teal" },
+            { title: "Deadline reminder — Volunteer feedback form closes June 10", time: "2 days ago", icon: "⏰", type: "red" },
+            { title: "Installation Ceremony 2025 dates confirmed — July 1", time: "4 days ago", icon: "🎉", type: "gold" }
+        ];
+        
+        container.innerHTML = `
+            <div class="announce-list" style="display:flex;flex-direction:column;gap:8px;">
+                ${announcements.map(ann => `
+                    <div class="announce-item" style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--color-background-secondary);">
+                        <div class="announce-icon" style="font-size:20px;">${ann.icon}</div>
+                        <div>
+                            <div class="announce-title" style="font-size:12px;font-weight:500;">${ann.title}</div>
+                            <div class="announce-time" style="font-size:10px;color:#6B7280;">${ann.time}</div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    function renderAnalytics() {
+        const container = document.getElementById('analyticsGrid');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px;">
+                <div class="metric"><div class="metric-n">${eventsData.reduce((sum, e) => sum + e.registered, 0)}</div><div class="metric-l">Total registrations</div><div class="metric-badge badge-g">+18% vs last sem</div></div>
+                <div class="metric"><div class="metric-n">87%</div><div class="metric-l">Avg. attendance rate</div><div class="metric-badge badge-g">+5%</div></div>
+                <div class="metric"><div class="metric-n">62</div><div class="metric-l">Active volunteers</div><div class="metric-badge badge-a">8 new</div></div>
+                <div class="metric"><div class="metric-n">${eventsData.length}</div><div class="metric-l">Events this year</div><div class="metric-badge badge-g">On track</div></div>
+            </div>
+            <div class="chart-wrap" style="display:grid;grid-template-columns:1.5fr 1fr;gap:12px;">
+                <div class="card">
+                    <div class="card-title">Monthly event attendance</div>
+                    <div class="bar-chart" style="display:flex;align-items:flex-end;gap:6px;height:100px;">
+                        ${['Jan','Feb','Mar','Apr','May','Jun'].map((month, idx) => `
+                            <div class="bar-col" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                                <div class="bar" style="height:${[45,60,40,75,90,100][idx]}px;background:#C9A84C;opacity:${[0.5,0.6,0.5,0.7,0.85,1][idx]};width:100%;border-radius:4px 4px 0 0;"></div>
+                                <div class="bar-label" style="font-size:9px;">${month}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Engagement breakdown</div>
+                    <div class="donut-wrap" style="display:flex;flex-direction:column;gap:8px;">
+                        <div class="donut-legend" style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--navy);"></div>Events (42%)</div>
+                        <div class="donut-legend" style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--gold);"></div>Volunteering (31%)</div>
+                        <div class="donut-legend" style="display:flex;align-items:center;gap:6px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--teal);"></div>Service (18%)</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.innerHTML = message;
+        toast.style.display = 'block';
+        toast.style.background = type === 'error' ? '#E8534A' : '#1D8A6E';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000);
+    }
+    
+    function switchTab(id, el) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('tab-' + id).classList.add('active');
+    }
+    
+    // Initialize
+    loadData();
+</script>
+</body>
+</html>
